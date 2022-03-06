@@ -1,46 +1,55 @@
 <template>
-  <v-container>
-    <v-row text-center justify-center>
-      <v-col class="cols-12">
-        <header class="imageContainer">
-          <v-img
-            :src="require('../assets/backImg.jpg')"
-            :lazy-src="require('../assets/backImg.jpg')"
-          ></v-img>
-          <div class="insideObject tracking-in-expand">Hello guys !!!</div>
-        </header>
+  <v-card class="mx-auto landingCard" tile>
+    <div class="parallax">
+      <div class="insideObject tracking-in-expand">Hello guys &#128512;!!!</div>
+    </div>
+
+    <v-row class="px-5 grey lighten-1">
+      <v-col cols="12">
+        <div class="cardTitle">
+          <h1 data-aos="zoom-in">Random Users:</h1>
+        </div>
       </v-col>
     </v-row>
 
-    <v-row>
-      <v-col cols-12 class="mb-2">
-        <main class="cardRow">
-          <h1>Random Users:</h1>
-        </main>
-      </v-col>
-    </v-row>
-
-    <v-row justify-center>
-      <v-col class="col-12 col-sm-6 col-md-4" v-for="(user, i) in users" :key="i">
-        <v-card pa-2 shaped max-width="400">
+    <v-row class="grey lighten-1 px-5">
+      <v-col
+        class="col-12 col-sm-6 col-md-4"
+        v-for="(user, i) in users"
+        :key="i"
+      >
+        <v-card class="mx-auto" shaped max-width="400" data-aos="zoom-in">
           <v-card-title>{{ user.name }}</v-card-title>
 
           <v-divider></v-divider>
 
           <v-card-text>
-            <p>E-mail Address: </p>
-            <p>Phone Number: {{user.phone}}</p>
-            <p>Street: {{user.address.street}}</p>
-            <p>City: {{user.address.city}}</p>
-            <p>Zipcode: {{user.address.zipcode}}</p>
+            <p>
+              <span class="font-weight-bold">E-mail Address:</span>
+              {{ user.email }}
+            </p>
+            <p>
+              <span class="font-weight-bold">Phone Number:</span>
+              {{ user.phone }}
+            </p>
+            <p>
+              <span class="font-weight-bold">Street:</span>
+              {{ user.address.street }}
+            </p>
+            <p>
+              <span class="font-weight-bold">City:</span>
+              {{ user.address.city }}
+            </p>
+            <p>
+              <span class="font-weight-bold">Zipcode:</span>
+              {{ user.address.zipcode }}
+            </p>
           </v-card-text>
         </v-card>
       </v-col>
     </v-row>
-  </v-container>
+  </v-card>
 </template>
-
-// &#128512;
 
 <script>
 export default {
@@ -61,24 +70,7 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
-
-.container {
-  max-width: 100%;
-  font-family: "Poppins", sans-serif;
-}
-.imageContainer {
-  position: relative;
-  height: 400px;
-  color: white;
-  overflow: hidden;
-}
-.imageContainer img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 .insideObject {
   position: absolute;
   top: 40%;
@@ -88,6 +80,7 @@ export default {
   font-size: 50px;
   letter-spacing: 5px;
   font-weight: bold;
+  color: white;
 }
 .tracking-in-expand {
   -webkit-animation: tracking-in-expand 2s cubic-bezier(0.215, 0.61, 0.355, 1)
@@ -118,9 +111,44 @@ export default {
     opacity: 1;
   }
 }
-.cardRow h1 {
+.cardTitle h1 {
   font-family: "Permanent Marker", cursive;
   color: #424242;
   border-bottom: 3px solid #424242;
+}
+.landingCard {
+  height: 100%;
+}
+.parallax {
+  background-image: url("../assets/backImg.jpg");
+  height: 100%;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@media only screen and (max-device-width: 600px) {
+  .landingCard {
+    height: 40%;
+  }
+  .insideObject {
+    font-size: 20px;
+  }
+}
+@media only screen and (min-device-width: 600px) and (max-device-width: 900px) {
+  .landingCard {
+    height: 60%;
+  }
+  .insideObject {
+    font-size: 30px;
+  }
+}
+@media only screen and (min-device-width: 900) and (max-device-width: 1200px) {
+  .landingCard {
+    height: 80%;
+  }
+  .insideObject {
+    font-size: 40px;
+  }
 }
 </style>
