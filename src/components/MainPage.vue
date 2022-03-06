@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <v-row class="text-center">
-      <v-col cols="12">
+    <v-row text-center justify-center>
+      <v-col class="cols-12">
         <header class="imageContainer">
           <v-img
             :src="require('../assets/backImg.jpg')"
@@ -13,10 +13,28 @@
     </v-row>
 
     <v-row>
-      <v-col cols-12 class="mb-2" style="border: 1px solid black">
+      <v-col cols-12 class="mb-2">
         <main class="cardRow">
           <h1>Random Users:</h1>
         </main>
+      </v-col>
+    </v-row>
+
+    <v-row justify-center>
+      <v-col class="col-12 col-sm-6 col-md-4" v-for="(user, i) in users" :key="i">
+        <v-card pa-2 shaped max-width="400">
+          <v-card-title>{{ user.name }}</v-card-title>
+
+          <v-divider></v-divider>
+
+          <v-card-text>
+            <p>E-mail Address: </p>
+            <p>Phone Number: {{user.phone}}</p>
+            <p>Street: {{user.address.street}}</p>
+            <p>City: {{user.address.city}}</p>
+            <p>Zipcode: {{user.address.zipcode}}</p>
+          </v-card-text>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
@@ -27,10 +45,18 @@
 <script>
 export default {
   name: "MainPage",
-
-  data: () => ({
-    //
-  }),
+  data() {
+    return {
+      users: [],
+    };
+  },
+  mounted() {
+    this.$http
+      .get("https://jsonplaceholder.typicode.com/users")
+      .then(function (data) {
+        this.users = data.body.slice(0, 9);
+      });
+  },
 };
 </script>
 
